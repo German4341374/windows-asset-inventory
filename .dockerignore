@@ -1,0 +1,9 @@
+**/bin
+**/obj
+.git
+.github
+.vs
+TestResults
+docs
+*.md
+Dockerfile

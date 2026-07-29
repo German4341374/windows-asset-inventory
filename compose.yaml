@@ -1,0 +1,28 @@
+services:
+  inventory:
+    build:
+      context: .
+      target: runtime
+    image: windows-asset-inventory:local
+    container_name: windows-asset-inventory
+    ports:
+      - "8080:8080"
+    volumes:
+      - inventory-data:/app/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 3s
+      start_period: 15s
+      retries: 3
+
+volumes:
+  inventory-data:
