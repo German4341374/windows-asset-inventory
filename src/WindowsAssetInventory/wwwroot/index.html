@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compact company hardware inventory dashboard">
+  <title>Windows Asset Inventory</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Windows Asset Inventory home">
+        <span class="brand-mark">WA</span>
+        <span><strong>Windows Asset</strong><small>Inventory console</small></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a class="active" href="#inventory">Inventory</a>
+        <a href="/swagger">API documentation</a>
+        <a href="/health">System health</a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="live-dot"></span>
+        Local inventory database
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">OPERATIONS / ASSET CONTROL</p>
+          <h1>Asset overview</h1>
+          <p class="subtitle">Track ownership, lifecycle, warranty, and maintenance from one compact view.</p>
+        </div>
+        <div class="actions">
+          <a class="button secondary" href="/api/assets/export-csv">Export CSV</a>
+          <button class="button primary" id="open-create" type="button">Add asset</button>
+        </div>
+      </header>
+
+      <section class="stats" aria-label="Inventory statistics">
+        <article class="stat-card accent">
+          <span>Total assets</span>
+          <strong id="stat-total">—</strong>
+          <small>Managed inventory</small>
+        </article>
+        <article class="stat-card">
+          <span>Assigned</span>
+          <strong id="stat-assigned">—</strong>
+          <small id="stat-assigned-detail">Active devices</small>
+        </article>
+        <article class="stat-card">
+          <span>In stock</span>
+          <strong id="stat-stock">—</strong>
+          <small>Ready to deploy</small>
+        </article>
+        <article class="stat-card warning">
+          <span>Warranty watch</span>
+          <strong id="stat-warranty">—</strong>
+          <small>Expires within 30 days</small>
+        </article>
+      </section>
+
+      <section class="inventory-panel" id="inventory">
+        <div class="panel-heading">
+          <div>
+            <h2>Equipment inventory</h2>
+            <p id="result-count">Loading assets…</p>
+          </div>
+          <button class="icon-button" id="refresh" type="button" title="Refresh inventory">↻</button>
+        </div>
+
+        <form class="filters" id="filters">
+          <label class="search-field">
+            <span class="sr-only">Search assets</span>
+            <input id="search" type="search" placeholder="Search tag, hostname, serial, or user">
+          </label>
+          <label>
+            <span class="sr-only">Asset type</span>
+            <select id="type">
+              <option value="">All types</option>
+              <option>Computer</option>
+              <option>Laptop</option>
+              <option>Monitor</option>
+              <option>Peripheral</option>
+            </select>
+          </label>
+          <label>
+            <span class="sr-only">Asset status</span>
+            <select id="status">
+              <option value="">All statuses</option>
+              <option value="InStock">In Stock</option>
+              <option>Assigned</option>
+              <option>Repair</option>
+              <option>Retired</option>
+            </select>
+          </label>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Type</th>
+                <th>Device</th>
+                <th>Owner</th>
+                <th>Warranty</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="asset-rows">
+              <tr><td colspan="6" class="empty">Loading inventory…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        <span>SQLite-backed local portfolio environment</span>
+        <a href="/swagger">Open Swagger UI</a>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="create-dialog">
+    <form id="create-form">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">NEW RECORD</p><h2>Add inventory asset</h2></div>
+        <button class="close-button" id="close-create" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="form-grid">
+        <label>Asset tag<input name="assetTag" required maxlength="40" placeholder="LT-1042"></label>
+        <label>Type<select name="type" required><option>Laptop</option><option>Computer</option><option>Monitor</option><option>Peripheral</option></select></label>
+        <label>Manufacturer<input name="manufacturer" required maxlength="100" placeholder="Dell"></label>
+        <label>Model<input name="model" required maxlength="120" placeholder="Latitude 7450"></label>
+        <label>Serial number<input name="serialNumber" required maxlength="120" placeholder="DEMO-SERIAL-1042"></label>
+        <label>Hostname<input name="hostname" maxlength="100" placeholder="OPS-LT-42"></label>
+        <label>Status<select name="status" required><option value="In Stock">In Stock</option><option>Repair</option><option>Retired</option></select></label>
+        <label>Purchase date<input name="purchaseDate" type="date"></label>
+        <label>Warranty until<input name="warrantyUntil" type="date"></label>
+      </div>
+      <p class="form-error" id="form-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button class="button secondary" id="cancel-create" type="button">Cancel</button>
+        <button class="button primary" type="submit">Create asset</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

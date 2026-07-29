@@ -1,0 +1,16 @@
+**/bin/
+**/obj/
+.vs/
+.idea/
+.vscode/
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.trx
+*.db
+*.db-shm
+*.db-wal
+src/WindowsAssetInventory/App_Data/
+.env
+.DS_Store
