@@ -99,8 +99,8 @@ jobs:
 
       - name: Show logs on failure
         if: failure()
-        run: docker logs inventory-ci
+        run: docker logs inventory-ci || true
 
       - name: Stop container
         if: always()
-        run: docker rm --force inventory-ci
+        run: docker rm --force inventory-ci || true

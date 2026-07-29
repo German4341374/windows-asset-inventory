@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0.302-alpine3.23 AS build
 
 WORKDIR /src
-COPY global.json Directory.Build.props WindowsAssetInventory.sln ./
+COPY .editorconfig global.json Directory.Build.props WindowsAssetInventory.sln ./
 COPY src/WindowsAssetInventory/WindowsAssetInventory.csproj src/WindowsAssetInventory/
 COPY src/WindowsAssetInventory/packages.lock.json src/WindowsAssetInventory/
 COPY tests/WindowsAssetInventory.Tests/WindowsAssetInventory.Tests.csproj tests/WindowsAssetInventory.Tests/
