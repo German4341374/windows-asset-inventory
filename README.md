@@ -327,7 +327,7 @@ a real deployment.
 - Automatic startup migrations are convenient for one instance but larger deployments should use
   a controlled migration job.
 
-## Future Improvements
+## Possible next steps
 
 - Add OpenID Connect and role-based authorization.
 - Add assignment history and immutable audit events.
