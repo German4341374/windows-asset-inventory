@@ -15,7 +15,7 @@ RUN dotnet publish src/WindowsAssetInventory/WindowsAssetInventory.csproj \
     --output /app/publish \
     /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0.10-alpine3.23 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:10.0.12-alpine3.23 AS runtime
 
 WORKDIR /app
 COPY --from=build --chown=app:app /app/publish ./
