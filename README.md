@@ -4,14 +4,12 @@
 [![.NET 10 LTS](https://img.shields.io/badge/.NET-10%20LTS-512BD4.svg)](https://dotnet.microsoft.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Windows Asset Inventory is a compact ASP.NET Core application for tracking company computers,
-laptops, monitors, peripherals, users, assignments, warranties, maintenance, and installed
-software. It combines a validated REST API with a responsive operations dashboard and a
-local SQLite database.
+Keep an inventory of computers, monitors, and other office equipment.
+Assign devices to people, record repairs and installed software, and check which warranties
+are about to end.
 
-The project is intentionally small enough to run on a workstation while demonstrating
-production-oriented API design, Entity Framework migrations, business rules, integration tests,
-container hardening, and automated CI.
+The web interface and REST API use the same SQLite database. You can run the ASP.NET Core
+app on your computer or start it with Docker.
 
 ## Features
 
