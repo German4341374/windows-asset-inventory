@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:10.0.302-alpine3.23 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0.401-alpine3.23 AS build
 
 WORKDIR /src
 COPY .editorconfig global.json Directory.Build.props WindowsAssetInventory.sln ./
